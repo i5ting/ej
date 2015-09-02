@@ -1,16 +1,13 @@
-var json2csv = require('json2csv');
-var fields = ['date', 'express_company', '_id.$oid'];
 
 var fs = require('fs');
 var current_path = process.cwd();
 var get = require('lodash.get');
-
+var csv = require("fast-csv");
 var debug = require('debug')('json2csv')
 
-debug('json to csv');
+debug('json2csv');
 
-
-function _a(obj, k, arr){
+function _get_key_from_obj_tree(obj, k, arr){
   var o = obj;
   var ret = [];
   var pre = "";
@@ -25,7 +22,7 @@ function _a(obj, k, arr){
     // debug('k=' + k + ', v=' + v);
     if(typeof v == 'object'){
       // debug(v + '=obj');
-      var _new_ret = _a(v, k, ret);
+      var _new_ret = _get_key_from_obj_tree(v, k, ret);
 
       ret.concat(_new_ret);
     }else{
@@ -47,16 +44,6 @@ function _a(obj, k, arr){
 function encode(k, v) {
   return k //+ '@@' + v;
 }
-
-function decode(arr){
-  // for(){
-  //
-  // }
-}
-
-
-var csv = require("fast-csv");
-
 
 function _get_array_from_json_file(input_json_name){
   var config_file = input_json_name
@@ -92,7 +79,7 @@ function generate(input_json_name, output_csv_name) {
     try
     {
       //在此运行代码
-      var ret = _a(o);
+      var ret = _get_key_from_obj_tree(o);
 
       // debug(arr)
     
@@ -122,6 +109,6 @@ function generate(input_json_name, output_csv_name) {
   csvStream.end();
 }
 
-generate('test/1.json', 'csv_name1.csv');
-// generate('test/2.json', 'csv_name2.csv');
-// generate('test/3.json', 'csv_name3.csv');
+module.exports = function (input_json_name, output_csv_name) {
+  generate(input_json_name, output_csv_name);
+}
