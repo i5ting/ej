@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test":"DEBUG=json2csv node test.js",
-    "start": "npm publish ."
+    "bin": "node bin/ej.js senddeliveryhistories.json aaa.csv",
+    "start": "npm publish .",
+    "clean": "rm -rf *.csv"
   },
   "preferGlobal": "true",
   "bin": {

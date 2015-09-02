@@ -61,6 +61,7 @@ function _get_csv_stream_with_genrate_name(output_csv_name){
       writableStream = fs.createWriteStream(output_csv_name);
 
   writableStream.on("finish", function(){
+    console.timeEnd("ej time ");
     debug("DONE!");
   });
 
@@ -70,8 +71,11 @@ function _get_csv_stream_with_genrate_name(output_csv_name){
 }
 
 function generate(input_json_name, output_csv_name) {
+  console.time("ej time ");
   var arr = _get_array_from_json_file(input_json_name);
   var csvStream = _get_csv_stream_with_genrate_name(output_csv_name);
+  
+  console.log('records : ' + arr.length);
   
   for(var i in arr){
     var o = arr[i];
