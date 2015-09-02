@@ -1,0 +1,17 @@
+{
+  "name": "json-csv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "fast-csv": "^0.6.0",
+    "json2csv": "^2.11.0",
+    "lodash.get": "^3.7.0"
+  }
+}
