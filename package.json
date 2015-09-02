@@ -1,6 +1,6 @@
 {
   "name": "ej",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "export json to csv",
   "main": "index.js",
   "scripts": {
