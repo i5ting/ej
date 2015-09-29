@@ -56,12 +56,13 @@ function _get_array_from_json_file(input_json_name){
   return arr;
 }
 
-function _get_csv_stream_with_genrate_name(output_csv_name){
+function _get_csv_stream_with_genrate_name(output_csv_name, succ_cb){
   var csvStream = csv.createWriteStream({headers: true}),
       writableStream = fs.createWriteStream(output_csv_name);
 
   writableStream.on("finish", function(){
     console.timeEnd("ej time ");
+    succ_cb();
     debug("DONE!");
   });
 
@@ -70,10 +71,10 @@ function _get_csv_stream_with_genrate_name(output_csv_name){
   return csvStream;
 }
 
-function generate(input_json_name, output_csv_name) {
+function generate(input_json_name, output_csv_name, succ_cb, fail_cb) {
   console.time("ej time ");
   var arr = _get_array_from_json_file(input_json_name);
-  var csvStream = _get_csv_stream_with_genrate_name(output_csv_name);
+  var csvStream = _get_csv_stream_with_genrate_name(output_csv_name, succ_cb);
   
   console.log('records : ' + arr.length);
   
@@ -106,6 +107,7 @@ function generate(input_json_name, output_csv_name) {
       console.log(err);
       console.log(o);
       console.log('end error\n');
+      fail_cb();
     }
     
   }
@@ -113,6 +115,6 @@ function generate(input_json_name, output_csv_name) {
   csvStream.end();
 }
 
-module.exports = function (input_json_name, output_csv_name) {
-  generate(input_json_name, output_csv_name);
+module.exports = function (input_json_name, output_csv_name , succ_cb, fail_cb) {
+  generate(input_json_name, output_csv_name, succ_cb, fail_cb);
 }

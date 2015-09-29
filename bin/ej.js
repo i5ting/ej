@@ -9,4 +9,8 @@ csv  = argv[3]
 
 var generate = require('../index');
 
-generate(json, csv);
+generate(json, csv, function(){
+  
+}, function(){
+  
+});
