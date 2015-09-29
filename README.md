@@ -69,6 +69,7 @@ ej(s.replace('//','/'),d.replace('//','/'),function(){
 
 ## 版本历史
 
+- v1.0.4 增加成功和失败callback
 - v1.0.0 初始化版本,实现ej导出
 
 ## 欢迎fork和反馈
