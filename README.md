@@ -45,6 +45,20 @@ ej = export json to csv
 
     ej input.json output.csv
 
+## Code
+
+```
+var ej  = require('ej');
+
+var s = root + "/senddeliveryhistories.json";
+var d = root + '/' + req.query.date + '-' + time + ".csv";
+ej(s.replace('//','/'),d.replace('//','/'),function(){
+  // success
+},function(){
+  // fail
+});
+```
+
 ## Contributing
 
 1. Fork it
